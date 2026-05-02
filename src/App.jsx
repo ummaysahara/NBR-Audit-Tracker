@@ -15,7 +15,7 @@ function App() {
     setResult(null);
     setError(false);
     try {
-      const response = await fetch(`http://localhost:5000/search/${tin}`);
+      const response = await fetch(`https://nbr-server-production.up.railway.app/search/${tin}`);
       const data = await response.json();
       if (data.found) {
         setResult(data.data);
