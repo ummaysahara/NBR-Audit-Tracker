@@ -58,7 +58,7 @@ function App() {
             <input
               type="text"
               maxLength="12"
-              style={{ width: '100%', padding: '20px', borderRadius: '12px', border: '4px solid #ffcc00', fontSize: '28px', textAlign: 'center', fontWeight: '900', letterSpacing: '4px', outline: 'none', boxSizing: 'border-box', color: '#ffffff4c' }}
+              style={{ width: '100%', padding: '20px', borderRadius: '12px', border: '4px solid #ffcc00', fontSize: '28px', textAlign: 'center', fontWeight: '900', letterSpacing: '4px', outline: 'none', boxSizing: 'border-box', color: '#09010179' }}
               placeholder="12-digit-e-TIN"
               value={tin}
               onChange={(e) => setTin(e.target.value.replace(/\D/g, ""))}
