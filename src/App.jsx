@@ -15,6 +15,7 @@ function App() {
     setResult(null);
     setError(false);
     try {
+      // URL থেকে ডাবল স্ল্যাশ কমিয়ে দেওয়া হয়েছে
       const response = await fetch(`https://nbr-server-production.up.railway.app/search/${tin}`);
       const data = await response.json();
       if (data.found) {
@@ -23,7 +24,7 @@ function App() {
         setError(true);
       }
     } catch (err) {
-      alert("Server is not running! Run 'node server.js'");
+      alert("Server is not running or network issue!");
     } finally {
       setLoading(false);
     }
@@ -40,7 +41,7 @@ function App() {
 
       <main style={{ maxWidth: '700px', margin: '40px auto', padding: '0 20px' }}>
 
-        {/* 2. Disclaimer Box (As per Screenshot) */}
+        {/* 2. Disclaimer Box */}
         <div style={{ backgroundColor: '#f0f2ff', border: '1px solid #d0d7ff', borderRadius: '12px', padding: '20px', marginBottom: '30px', color: '#4a5568', fontSize: '13px', lineHeight: '1.6' }}>
           <p style={{ margin: 0 }}>
             <strong>Disclaimer:</strong> This is a digital assistance tool using publicly available NBR data. This tool is not affiliated with the National Board of Revenue. Regardless of what this tool shows, <strong>always verify your audit status directly with NBR</strong> or your tax circle before taking any action.
@@ -55,14 +56,30 @@ function App() {
 
           <div style={{ position: 'relative' }}>
             <label style={{ display: 'block', color: 'white', fontSize: '11px', fontWeight: 'bold', marginBottom: '10px', opacity: 0.8, textTransform: 'uppercase' }}>Taxpayer Identification Number (TIN)</label>
+            
+            {/* Input Field: Background White and Text Black */}
             <input
               type="text"
               maxLength="12"
-              style={{ width: '100%', padding: '20px', borderRadius: '12px', border: '4px solid #ffcc00', fontSize: '24px', textAlign: 'center', fontWeight: '900', letterSpacing: '4px', outline: 'none', boxSizing: 'border-box', color: '#ffffff' }}
+              style={{ 
+                width: '100%', 
+                padding: '20px', 
+                borderRadius: '12px', 
+                border: '4px solid #ffcc00', 
+                fontSize: '24px', 
+                textAlign: 'center', 
+                fontWeight: '900', 
+                letterSpacing: '4px', 
+                outline: 'none', 
+                boxSizing: 'border-box', 
+                color: '#000000',      // লেখার রঙ কালো
+                backgroundColor: '#ffffff' // ব্যাকগ্রাউন্ড সাদা
+              }}
               placeholder="12-digit-e-TIN"
               value={tin}
               onChange={(e) => setTin(e.target.value.replace(/\D/g, ""))}
             />
+            
             <button
               onClick={handleSearch}
               style={{ width: '100%', marginTop: '20px', backgroundColor: '#f42a41', color: 'white', border: 'none', padding: '20px', borderRadius: '12px', fontSize: '18px', fontWeight: '900', cursor: 'pointer', textTransform: 'uppercase', transition: '0.3s', boxShadow: '0 4px 15px rgba(244,42,65,0.4)' }}
@@ -73,14 +90,13 @@ function App() {
 
           {/* Result Section */}
           {result && (
-            <div style={{ marginTop: '30px', backgroundColor: 'white', borderRadius: '12px', overflow: 'hidden', animation: 'fadeIn 0.5s' }}>
+            <div style={{ marginTop: '30px', backgroundColor: 'white', borderRadius: '12px', overflow: 'hidden' }}>
               <div style={{ backgroundColor: '#f42a41', color: 'white', padding: '10px', fontSize: '12px', fontWeight: 'bold', textAlign: 'center' }}>TIN is selected for Audit</div>
-              <div style={{ padding: '25px' }}>
+              <div style={{ padding: '25px', color: '#333' }}>
                 <p style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid #eee', paddingBottom: '10px', margin: '0 0 10px 0', fontSize: '15px' }}><strong>TIN:</strong> <span>{result.tin}</span></p>
                 <p style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid #eee', paddingBottom: '10px', margin: '0 0 10px 0', fontSize: '15px' }}><strong>Zone:</strong> <span>{result.zone}</span></p>
                 <p style={{ display: 'flex', justifyContent: 'space-between', margin: 0, fontSize: '15px' }}><strong>Circle:</strong> <span>{result.circle}</span></p>
               </div>
-
             </div>
           )}
 
@@ -91,12 +107,9 @@ function App() {
           )}
         </div>
 
-
-
-
-        {/* 6. WhatsApp Floating Action */}
+        {/* WhatsApp Floating Action */}
         <div style={{ marginTop: '30px' }}>
-          <a href="https://wa.me/8801715240183" target="_blank" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#25d366', color: 'white', padding: '20px', borderRadius: '16px', textDecoration: 'none', boxShadow: '0 10px 20px rgba(37,211,102,0.2)' }}>
+          <a href="https://wa.me/8801715240183" target="_blank" rel="noreferrer" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#25d366', color: 'white', padding: '20px', borderRadius: '16px', textDecoration: 'none', boxShadow: '0 10px 20px rgba(37,211,102,0.2)' }}>
             <span style={{ fontWeight: '900', textTransform: 'uppercase', fontSize: '14px' }}>Talk to Tax Consultant</span>
             <span style={{ backgroundColor: 'rgba(0,0,0,0.1)', padding: '5px 15px', borderRadius: '8px', fontWeight: 'bold' }}>+8801715240183</span>
           </a>
@@ -109,4 +122,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
