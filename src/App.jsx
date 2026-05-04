@@ -1,5 +1,5 @@
 import { useState } from 'react'
-
+import { Analytics } from "@vercel/analytics/react";
 function App() {
   const [tin, setTin] = useState('')
   const [result, setResult] = useState(null)
@@ -103,7 +103,9 @@ function App() {
         </div>
 
       </main>
+      <Analytics />
     </div>
+
   )
 }
 
